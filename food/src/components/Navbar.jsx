@@ -9,7 +9,7 @@ import {
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import Button from "./Button";
-import { Avatar } from "@mui/material";
+
 
 
 const Nav = styled.div`
@@ -136,6 +136,7 @@ const MobileMenu = styled.ul`
 const Navbar = ({ setOpenAuth, openAuth, currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
   
+  
   return (
     <Nav>
       <NavContainer>
@@ -156,9 +157,7 @@ const Navbar = ({ setOpenAuth, openAuth, currentUser }) => {
           <Navlink to="/cart">
             <ShoppingCartOutlined sx={{ color: "inherit", fontSize: "28px" }} />
           </Navlink>
-          {currentUser && (
-            <Avatar src={currentUser?.img}>{currentUser?.name[0]}</Avatar>
-          )}
+          
         </MobileIcons>
 
         <NavItems>
@@ -170,44 +169,31 @@ const Navbar = ({ setOpenAuth, openAuth, currentUser }) => {
 
         {isOpen && (
           <MobileMenu isOpen={isOpen}>
-            <Navlink to="/" onClick={() => setIsOpen(false)}>
-              Home
-            </Navlink>
-            <Navlink to="/dishes" onClick={() => setIsOpen(false)}>
-              Dishes
-            </Navlink>
-            <Navlink to="/orders" onClick={() => setIsOpen(false)}>
-              Orders
-            </Navlink>
-            <Navlink to="/contact" onClick={() => setIsOpen(false)}>
-              Contact
-            </Navlink>
-            
-          </MobileMenu>
+          <Navlink to="/" onClick={() => setIsOpen(false)}>
+            Home
+          </Navlink>
+          <Navlink to="/dishes" onClick={() => setIsOpen(false)}>
+            Dishes
+          </Navlink>
+          <Navlink to="/orders" onClick={() => setIsOpen(false)}>
+            Orders
+          </Navlink>
+          <Navlink to="/contact" onClick={() => setIsOpen(false)}>
+            Contact
+          </Navlink>
+          <div style={{ display: "flex", gap: "12px" }}>
+            <Button text="Sign Up" outlined small onClick={() => setOpenAuth(true)} />
+            <Button text="Sign In" small onClick={() => setOpenAuth(true)} />
+          </div>
+        </MobileMenu>
+        
         )}
 
         <ButtonContainer>
           <Navlink to="/search">
             <SearchRounded sx={{ color: "inherit", fontSize: "30px" }} />
           </Navlink>
-          {currentUser ? (
-            <>
-              <Navlink to="/favorite">
-                <FavoriteBorder sx={{ color: "inherit", fontSize: "28px" }} />
-              </Navlink>
-              <Navlink to="/cart">
-                <ShoppingCartOutlined
-                  sx={{ color: "inherit", fontSize: "28px" }}
-                />
-              </Navlink>
-              <Avatar src={currentUser?.img}>{currentUser?.name[0]}</Avatar>
-              
-            </>
-          ) : (
-            <>
-              <Button text="Sign In" small onClick={() => setOpenAuth(true)} />
-            </>
-          )}
+          
         </ButtonContainer>
       </NavContainer>
     </Nav>
